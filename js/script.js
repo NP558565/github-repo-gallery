@@ -1,7 +1,8 @@
 // Create and name a Global variable to select the div with a class of "overview".This div is where your profile info will appear.
 	const overview = document.querySelector('.overview');
 /*Create a global variable called username. In the value, add your GitHub username.*/
-	const username = "np558565";
+const username = "np558565";
+//create and name another global variable to select the unordered list to display the repos list.
 	const repoList = document.querySelector(".repo-list");
 // Creat a variable that selects the section with a class of "repos" where all your repo information appears. 
 	const allReposContainer = document.querySelector(".repos");
@@ -43,4 +44,24 @@
 	overview.append(div);
 	gitRepos();
 };
+
+/*create and name a new async function to fetch your repos. Use the List Repositories of Usersection of the documentation to find the endpoints for your API URL to fetch the list of repos.*/
+			const gitRepos = async function () {
+			const fetchRepos = await fetch(`https://api.github.com/users/${username}/repos?sort=updated&per_page=100`);
+/*Your second await statement should return the JSON response. Log out the response and call the function. In the response, look through the properties because you’ll need one of the properties to complete the next function!*/
+			const repoData = await fetchRepos.json();
+			displayRepos(repoData);
+};
+//// create and name a function to display information about each repo
+			const displayRepos = function (repos) {
+			filterInput.classList.remove("hide");
+			for (const repo of repos) {
+			const repoItem = document.createElement("li");
+			repoItem.classList.add("repo");
+			repoItem.innerHTML = `<h3>${repo.name}</h3>`;
+			repoList.append(repoItem);
+}
+};
+
+
 
