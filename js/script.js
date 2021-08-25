@@ -113,5 +113,40 @@
 			`;
 				repoData.append(div);
 			};
+			
+//Add a click event to the Back Button
+//create a click event listener attached to your variable that points to the Back to Repo Gallery button. 
+				viewReposButton.addEventListener("click", function () {
+// unhide (display) the section with the class of "repos"
+				allReposContainer.classList.remove("hide");
+// Add the "hide" class to the section where the individual repo data will appear
+				repoData.classList.add("hide");
+// Also, add the "hide" class to the Back to Repo Gallery button itself. 
+				viewReposButton.classList.add("hide");
+			});
+			
+// Display the Input Element by creating a dynamic search
+				filterInput.addEventListener("input", function (e) {
+// create a variable to capture the value of the search text
+				const searchText = e.target.value;
+//Create a variable called repos to select ALL elements on the page with a class of “repo”.
+					const repos = document.querySelectorAll(".repo");
+//Create a variable and assign it to the lowercase value of the search text.
+					const searchLowerText = searchText.toLowerCase();
+					
+//// Check to see if the lowercase repo text includes the lowercase search text.  
+					for (const repo of repos) {
+					const repoLowerText = repo.innerText.toLowerCase();
+					if (repoLowerText.includes(searchLowerText)) {
+// If the repo contains the text, show it.
+					repo.classList.remove("hide");
+// If it doesn't contain the text, hide the repo.
+					} else {
+					repo.classList.add("hide");
+					}
+				}
+			});
+
+			
 
 
